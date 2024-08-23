@@ -13,7 +13,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`${manrope.className} w-full bg-[#1A3129] fixed`}>
+    <nav className={`${manrope.className} w-full bg-[#1A3129]`}>
       <div className="container mx-auto flex items-center justify-between py-4 px-5 md:px-10">
         {/* Left side: Logo */}
         <div className="flex items-center">
