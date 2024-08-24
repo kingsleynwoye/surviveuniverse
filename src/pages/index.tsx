@@ -12,7 +12,13 @@ type Message = {
 
 export default function Home() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const texts = ["How are you?", "Yaya kake?", "Kedu?", "Bawo ni o se wa?"];
+  const texts = [
+    "How are you?",
+    "Yaya?",
+    "Kedu?",
+    "Bawo ni?",
+    "Comment ça va?",
+  ];
 
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
