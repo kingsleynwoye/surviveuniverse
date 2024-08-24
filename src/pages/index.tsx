@@ -28,7 +28,7 @@ export default function Home() {
   const featuresRef = useRef<HTMLDivElement>(null);
   const healthRef = useRef<HTMLDivElement>(null);
   const medicalRef = useRef<HTMLDivElement>(null);
-  const chatRef = useRef<HTMLDivElement>(null);
+  const getStartedRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -71,6 +71,52 @@ export default function Home() {
 
   const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
     sectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Form state management
+  const [formData, setFormData] = useState({
+    age: "",
+    symptoms: "",
+    medicalHistory: "",
+    healthDescription: "",
+  });
+
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    // Handle health feedback logic here
+    console.log("Form Data:", formData);
+    // Simulate a bot response based on the form data
+    const feedback = `Based on your inputs, we recommend: ${getHealthFeedback(
+      formData
+    )}`;
+    setMessages([...messages, { text: feedback, sender: "bot" }]);
+  };
+
+  const getHealthFeedback = (data: typeof formData) => {
+    // Simulate health feedback based on the form data (this can be more complex)
+    if (data.age && data.symptoms) {
+      if (
+        parseInt(data.age) > 60 &&
+        data.symptoms.toLowerCase().includes("cough")
+      ) {
+        return "You may be at risk for severe conditions. Please consult a healthcare professional.";
+      } else if (data.symptoms.toLowerCase().includes("headache")) {
+        return "It might be a common headache, but rest, hydration, and avoiding stress may help.";
+      } else {
+        return "Consider consulting with a professional for a more accurate diagnosis.";
+      }
+    }
+    return "Please provide more information for a better assessment.";
   };
 
   return (
@@ -140,10 +186,10 @@ export default function Home() {
                 </button>
               </li>
               <button
-                onClick={() => scrollToSection(chatRef)}
+                onClick={() => scrollToSection(getStartedRef)}
                 className="bg-black text-white px-5 py-2 rounded-full font-medium transition duration-200"
               >
-                Chat Now
+                Get Started
               </button>
             </ul>
             <button
@@ -241,18 +287,17 @@ export default function Home() {
             <li>
               <button
                 onClick={() => {
-                  scrollToSection(chatRef);
+                  scrollToSection(getStartedRef);
                   setMenuOpen(false);
                 }}
                 className="bg-black text-white px-5 py-2 rounded-full font-medium transition duration-200"
               >
-                Chat Now
+                Get Started
               </button>
             </li>
           </ul>
         )}
       </nav>
-
       {/* Main Content */}
       <main className={`${inter.className}`}>
         {/* Hero Content */}
@@ -260,11 +305,14 @@ export default function Home() {
           ref={heroRef}
           className="bg-[#0C513F] h-[60vh] md:h-[70vh] flex items-center justify-center"
         >
-          <div className="container max-w-6xl mx-auto md:px-20 flex flex-col items-center justify-center text-center space-y-10">
-            <h1 className="text-4xl md:text-8xl font-extrabold text-white">
-              {texts[currentTextIndex]}
-            </h1>
-            <div className="relative text-gray-600">
+          <div className="container max-w-6xl mx-auto md:px-20 flex flex-col items-center justify-center text-center space-y-8">
+            <div className="space-y-5">
+              <h1 className="text-4xl md:text-8xl font-extrabold text-white">
+                {texts[currentTextIndex]}
+              </h1>
+              <p>Your Health and Medical Assistant</p>
+            </div>
+            {/* <div className="relative text-gray-600">
               <input
                 type="search"
                 name="search"
@@ -291,10 +339,15 @@ export default function Home() {
                   <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
                 </svg>
               </button>
-            </div>
+            </div> */}
+            <button
+              onClick={() => scrollToSection(getStartedRef)}
+              className="bg-black text-white px-14 py-4 rounded-full font-medium transition duration-200"
+            >
+              Get Started
+            </button>
           </div>
         </section>
-
         {/* Features Content */}
         <section ref={featuresRef} className="bg-[#e9c0e9] py-20">
           <div className="container mx-auto px-6 md:px-20">
@@ -356,7 +409,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
         {/* Health Content */}
         <section ref={healthRef} className="bg-[#8c77ec] py-20">
           <div className="container mx-auto px-6 md:px-20">
@@ -403,7 +455,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
         {/* Medical Content */}
         <section ref={medicalRef} className="bg-[#ff884d] py-20">
           <div className="container mx-auto px-6 md:px-20">
@@ -449,51 +500,120 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Chat Section */}
-        <section ref={chatRef} className="bg-[#212121] py-20">
-          <div className="container mx-auto px-6 md:px-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-              Chat Now
+        {/* Get Started Section */}
+        <section ref={getStartedRef} className="bg-[#000000] py-20">
+          <div className="px-6">
+            <h2 className="text-3xl font-bold text-center mb-8">
+              Get Started with Your Health Check
             </h2>
-            <div className="bg-[#000000] p-8 rounded-2xl shadow-md">
-              {/* Chat Interface */}
-              <div className="overflow-y-auto h-64">
-                {messages.map((msg, index) => (
+            <form onSubmit={handleFormSubmit} className="max-w-xl mx-auto">
+              <div className="mb-4">
+                <label htmlFor="age" className="block text-lg font-medium">
+                  Age
+                </label>
+                <input
+                  type="text"
+                  id="age"
+                  name="age"
+                  value={formData.age}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                  placeholder="Your age eg: 20years"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="symptoms" className="block text-lg font-medium">
+                  Symptoms
+                </label>
+                {/* <textarea
+                id="symptoms"
+                name="symptoms"
+                value={formData.symptoms}
+                onChange={handleFormChange}
+                className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                placeholder="Your symptoms eg: Headache"
+                rows={4}
+                required
+              /> */}
+                <input
+                  type="text"
+                  id="symptoms"
+                  name="symptoms"
+                  value={formData.symptoms}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                  placeholder="Your symptoms eg: Headache"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="medicalHistory"
+                  className="block text-lg font-medium"
+                >
+                  Medical History
+                </label>
+                {/* <textarea
+                id="medicalHistory"
+                name="medicalHistory"
+                value={formData.medicalHistory}
+                onChange={handleFormChange}
+                className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                placeholder="Your medical history eg: Allergy"
+                rows={4}
+              /> */}
+                <input
+                  type="text"
+                  id="medicalHistory"
+                  name="medicalHistory"
+                  value={formData.medicalHistory}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                  placeholder="Your medical history eg: Allergy"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="healthDescription"
+                  className="block text-lg font-medium"
+                >
+                  Health Description
+                </label>
+                <textarea
+                  id="healthDescription"
+                  name="healthDescription"
+                  value={formData.healthDescription}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                  placeholder="Your health description eg: I'm having fever"
+                  rows={4}
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-green-500 text-white px-6 py-3 rounded-md w-full"
+              >
+                Get Feedback
+              </button>
+            </form>
+
+            {/* <div className="mt-8">
+              <h3 className="text-2xl font-semibold">Chat History</h3>
+              <div className="mt-4 space-y-3">
+                {messages.map((message, index) => (
                   <div
                     key={index}
-                    className={`flex ${
-                      msg.sender === "user" ? "justify-end" : "justify-start"
-                    } mb-4`}
+                    className={`p-3 rounded-md ${
+                      message.sender === "user" ? "bg-gray-200" : "bg-blue-200"
+                    }`}
                   >
-                    <div
-                      className={`px-4 py-2 rounded-2xl ${
-                        msg.sender === "user"
-                          ? "bg-[#2665d6] text-white"
-                          : "bg-gray-200 text-black"
-                      }`}
-                    >
-                      {msg.text}
-                    </div>
+                    {message.text}
                   </div>
                 ))}
               </div>
-              <form onSubmit={handleSendMessage} className="mt-4 flex">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  className="flex-1 p-2 rounded-l-lg bg-[#2f2f2f] outline-none"
-                  placeholder="Type your message..."
-                />
-                <button
-                  type="submit"
-                  className="bg-[#2665d6] text-white px-4 rounded-r-lg"
-                >
-                  Send
-                </button>
-              </form>
-            </div>
+            </div> */}
           </div>
         </section>
       </main>
