@@ -190,7 +190,7 @@ export default function Home() {
         {/* Features Content */}
         <section ref={featuresRef} className="bg-[#22ad80] py-20">
           <div className="container mx-auto px-6 md:px-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
               Features
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -252,7 +252,7 @@ export default function Home() {
         {/* Health Content */}
         <section ref={healthRef} className="bg-[#8c77ec] py-20">
           <div className="container mx-auto px-6 md:px-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
               Health is Wealth
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -299,7 +299,7 @@ export default function Home() {
         {/* Medical Content */}
         <section ref={medicalRef} className="bg-[#ff884d] py-20">
           <div className="container mx-auto px-6 md:px-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
               Medical is Vitamin
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
