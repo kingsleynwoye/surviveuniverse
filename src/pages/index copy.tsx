@@ -1,9 +1,9 @@
-import { FormEvent, useState, useRef, useEffect } from "react";
+import { FormEvent, useState, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const manrope = Manrope({ subsets: ["latin"] });
 
 type Message = {
   text: string;
@@ -11,9 +11,6 @@ type Message = {
 };
 
 export default function Home() {
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const texts = ["How are you?", "Yaya kake?", "Kedu?"];
-
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,14 +20,6 @@ export default function Home() {
   const healthRef = useRef<HTMLDivElement>(null);
   const medicalRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-    }, 3000); // Change text every 3 seconds
-
-    return () => clearInterval(intervalId);
-  }, [texts.length]);
 
   const handleSendMessage = async (e: FormEvent) => {
     e.preventDefault();
@@ -80,14 +69,14 @@ export default function Home() {
       </Head>
       {/* Nav */}
       <nav
-        className={`${inter.className} bg-[#FFFFFF] fixed top-5 left-0 right-0 mx-auto max-w-6xl rounded-full shadow-md px-5`}
+        className={`${manrope.className} bg-[#FFFFFF] fixed top-5 left-0 right-0 mx-auto max-w-6xl rounded-full shadow-md px-5 md:px-8`}
       >
-        <div className="h-16 flex items-center justify-between">
+        <div className="h-20 flex items-center justify-between">
           {/* Left side: Logo and Nav Links */}
           <div className="flex items-center space-x-8">
             {/* Logo */}
             <button
-              className="text-2xl font-bold text-black"
+              className="text-3xl font-bold text-black"
               onClick={() => scrollToSection(heroRef)}
             >
               Survive Universe
@@ -174,16 +163,35 @@ export default function Home() {
       </nav>
 
       {/* Main Content */}
-      <main className={`${inter.className}`}>
-        {/* Hero Content */}
+      <main className={`${manrope.className}`}>
+        {/* Main Content */}
         <section
           ref={heroRef}
           className="bg-[#0C513F] h-screen flex items-center justify-center"
         >
-          <div className="container max-w-6xl mx-auto md:px-20 flex flex-col items-center justify-center text-center">
-            <h1 className="text-5xl md:text-8xl font-extrabold">
-              {texts[currentTextIndex]}
-            </h1>
+          <div className="container mx-auto md:px-20 flex flex-col-reverse md:flex-row items-center justify-center">
+            {/* Left Side: Text Content */}
+            <div className="text-white p-6 md:w-1/2 text-center md:text-left space-y-5 md:space-y-10">
+              <h1 className="text-3xl md:text-5xl font-bold">
+                Health and Medical Assistant
+              </h1>
+              <p className="text-lg md:text-lg">
+                Welcome to Survive Universe, your personalized health and
+                medical assistant. We are here to provide you with tailored
+                support on your health journey. Get personalized guidance and
+                resources to manage your well-being effectively.
+              </p>
+            </div>
+            {/* Right Side: Image */}
+            <div className="w-full md:w-1/2 p-6 flex justify-center">
+              <Image
+                src="/hero.png"
+                alt="Health and Medical Assistant"
+                width={350}
+                height={350}
+                className="object-cover"
+              />
+            </div>
           </div>
         </section>
 
