@@ -181,7 +181,7 @@ export default function Home() {
           className="bg-[#0C513F] h-[60vh] flex items-center justify-center"
         >
           <div className="container max-w-6xl mx-auto md:px-20 flex flex-col items-center justify-center text-center">
-            <h1 className="text-5xl md:text-8xl font-extrabold">
+            <h1 className="text-5xl md:text-8xl font-extrabold text-white">
               {texts[currentTextIndex]}
             </h1>
           </div>
