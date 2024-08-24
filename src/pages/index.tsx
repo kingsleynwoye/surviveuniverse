@@ -178,7 +178,7 @@ export default function Home() {
         {/* Hero Content */}
         <section
           ref={heroRef}
-          className="bg-[#0C513F] h-screen flex items-center justify-center"
+          className="bg-[#0C513F] h-[60vh] flex items-center justify-center"
         >
           <div className="container max-w-6xl mx-auto md:px-20 flex flex-col items-center justify-center text-center">
             <h1 className="text-5xl md:text-8xl font-extrabold">
@@ -188,7 +188,7 @@ export default function Home() {
         </section>
 
         {/* Features Content */}
-        <section ref={featuresRef} className="bg-[#ff884d] py-20">
+        <section ref={featuresRef} className="bg-[#22ad80] py-20">
           <div className="container mx-auto px-6 md:px-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Features
@@ -203,7 +203,7 @@ export default function Home() {
                   height={60}
                   className="mx-auto mb-6"
                 />
-                <h3 className="text-xl font-semibold mb-4">
+                <h3 className="text-xl font-semibold mb-4 text-black">
                   Personalized Health Guidance
                 </h3>
                 <p className="text-gray-600">
@@ -220,7 +220,7 @@ export default function Home() {
                   height={60}
                   className="mx-auto mb-6"
                 />
-                <h3 className="text-xl font-semibold mb-4">
+                <h3 className="text-xl font-semibold mb-4 text-black">
                   Medical Resources
                 </h3>
                 <p className="text-gray-600">
@@ -237,7 +237,7 @@ export default function Home() {
                   height={60}
                   className="mx-auto mb-6"
                 />
-                <h3 className="text-xl font-semibold mb-4">
+                <h3 className="text-xl font-semibold mb-4 text-black">
                   24/7 Chat Support
                 </h3>
                 <p className="text-gray-600">
@@ -265,7 +265,7 @@ export default function Home() {
                   height={60}
                   className="mx-auto mb-6"
                 />
-                <h3 className="text-xl font-semibold mb-4 text-center">
+                <h3 className="text-xl font-semibold mb-4 text-black text-center">
                   Health Assistance
                 </h3>
                 <p className="text-gray-600 text-center">
@@ -283,7 +283,7 @@ export default function Home() {
                   height={60}
                   className="mx-auto mb-6"
                 />
-                <h3 className="text-xl font-semibold mb-4 text-center">
+                <h3 className="text-xl font-semibold mb-4 text-black text-center">
                   Health Monitoring
                 </h3>
                 <p className="text-gray-600 text-center">
@@ -297,7 +297,7 @@ export default function Home() {
         </section>
 
         {/* Medical Content */}
-        <section ref={medicalRef} className="bg-[#0cce9a] py-20">
+        <section ref={medicalRef} className="bg-[#ff884d] py-20">
           <div className="container mx-auto px-6 md:px-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Medical is Vitamin
@@ -312,7 +312,7 @@ export default function Home() {
                   height={60}
                   className="mx-auto mb-6"
                 />
-                <h3 className="text-xl font-semibold mb-4 text-center">
+                <h3 className="text-xl font-semibold mb-4 text-black text-center">
                   Medical Consultation
                 </h3>
                 <p className="text-gray-600 text-center">
@@ -330,7 +330,7 @@ export default function Home() {
                   height={60}
                   className="mx-auto mb-6"
                 />
-                <h3 className="text-xl font-semibold mb-4 text-center">
+                <h3 className="text-xl font-semibold mb-4 text-black text-center">
                   Prescription Assistance
                 </h3>
                 <p className="text-gray-600 text-center">
