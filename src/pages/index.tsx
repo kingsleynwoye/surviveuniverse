@@ -143,7 +143,7 @@ export default function Home() {
                 onClick={() => scrollToSection(chatRef)}
                 className="bg-black text-white px-5 py-2 rounded-full font-medium transition duration-200"
               >
-                Chat
+                Chat Now
               </button>
             </ul>
             <button
@@ -246,7 +246,7 @@ export default function Home() {
                 }}
                 className="bg-black text-white px-5 py-2 rounded-full font-medium transition duration-200"
               >
-                Chat
+                Chat Now
               </button>
             </li>
           </ul>
@@ -269,14 +269,14 @@ export default function Home() {
                 type="search"
                 name="search"
                 placeholder="Search Health, Medical..."
-                className="bg-white h-14 px-6 pr-16 rounded-full text-lg focus:outline-none"
+                className="bg-white h-12 px-6 pr-16 rounded-full text-lg focus:outline-none"
               />
               <button
                 type="submit"
                 className="absolute right-0 top-0 mt-4 mr-5"
               >
                 <svg
-                  className="h-6 w-6 fill-current"
+                  className="h-5 w-5 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   xmlnsXlink="http://www.w3.org/1999/xlink"
                   version="1.1"
