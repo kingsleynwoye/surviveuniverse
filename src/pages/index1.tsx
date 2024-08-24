@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Manrope } from "next/font/google";
-import Navbar from "@/components/navbar";
+// import Navbar from "@/components/navbar";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ export default function IndexCopy() {
       <Head>
         <title>Survive Universe | Health and Medical Assistant</title>
       </Head>
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Hero Section */}
       <div className={`${manrope.className} bg-[#F6FBE9]`}>
