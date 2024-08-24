@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+// import Navbar from "@/components/navbar";
+// import Footer from "@/components/footer";
 
 export default function Feedback() {
   const [feedback, setFeedback] = useState("");
@@ -13,7 +13,7 @@ export default function Feedback() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="p-8 min-h-screen bg-gray-100">
         <h2 className="text-2xl font-semibold mb-4">Submit Feedback</h2>
         {submitted ? (
@@ -42,7 +42,7 @@ export default function Feedback() {
           </Link>
         </Link>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
