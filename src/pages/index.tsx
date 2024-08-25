@@ -132,7 +132,7 @@ export default function Home() {
       </Head>
       {/* Nav */}
       <nav
-        className={`${inter.className} bg-[#FFFFFF] fixed w-full shadow-sm px-5 z-50`}
+        className={`${inter.className} bg-[#FFFFFF] fixed top-0 right-0 w-full shadow-sm px-5 z-50`}
       >
         <div className="h-16 flex items-center justify-between">
           {/* Left side: Logo and Nav Links */}
@@ -303,15 +303,12 @@ export default function Home() {
         {/* Hero Content */}
         <section
           ref={heroRef}
-          className="bg-[#0C513F] h-[60vh] md:h-[70vh] flex items-center justify-center"
+          className="bg-[#0C513F] h-[50vh] md:h-[60vh] flex items-center justify-center mt-16"
         >
-          <div className="container max-w-6xl mx-auto md:px-20 flex flex-col items-center justify-center text-center space-y-8">
-            <div className="space-y-5">
-              <h1 className="text-4xl md:text-8xl font-extrabold text-white">
-                {texts[currentTextIndex]}
-              </h1>
-              <p>Your Health and Medical Assistant</p>
-            </div>
+          <div className="container max-w-6xl mx-auto md:px-20 flex flex-col items-center justify-center text-center space-y-10">
+            <h1 className="text-4xl md:text-8xl font-extrabold text-white">
+              {texts[currentTextIndex]}
+            </h1>
             {/* <div className="relative text-gray-600">
               <input
                 type="search"
@@ -618,9 +615,9 @@ export default function Home() {
         </section>
       </main>
       {/* Footer */}
-      <footer className={`bg-[#000000] py-2 text-center ${inter.className}`}>
+      {/* <footer className={`bg-[#000000] py-2 text-center ${inter.className}`}>
         <p className="text-white">&copy; 2024 Survive Universe</p>
-      </footer>
+      </footer> */}
     </>
   );
 }
