@@ -125,7 +125,7 @@ export default function Home() {
         <title>Survive Universe | Health and Medical Platform</title>
         <meta
           name="description"
-          content="Your personal companion for navigating tough times."
+          content="Survive Universe is a health and medical platform that guides users for navigating tough times."
         />
         <meta name="viewport" content="width=deviceWidth, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
