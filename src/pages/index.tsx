@@ -500,12 +500,15 @@ export default function Home() {
         {/* Get Started Section */}
         <section ref={getStartedRef} className="bg-[#000000] py-20">
           <div className="px-6">
-            <h2 className="text-3xl font-bold text-center mb-8">
+            <h2 className="text-3xl font-bold text-center mb-8 text-white">
               Get Started with Your Health Check
             </h2>
             <form onSubmit={handleFormSubmit} className="max-w-xl mx-auto">
               <div className="mb-4">
-                <label htmlFor="age" className="block text-lg font-medium">
+                <label
+                  htmlFor="age"
+                  className="block text-base font-medium text-white"
+                >
                   Age
                 </label>
                 <input
@@ -520,7 +523,10 @@ export default function Home() {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="symptoms" className="block text-lg font-medium">
+                <label
+                  htmlFor="symptoms"
+                  className="block text-base font-medium text-white"
+                >
                   Symptoms
                 </label>
                 {/* <textarea
@@ -547,7 +553,7 @@ export default function Home() {
               <div className="mb-4">
                 <label
                   htmlFor="medicalHistory"
-                  className="block text-lg font-medium"
+                  className="block text-base font-medium text-white"
                 >
                   Medical History
                 </label>
@@ -574,7 +580,7 @@ export default function Home() {
               <div className="mb-4">
                 <label
                   htmlFor="healthDescription"
-                  className="block text-lg font-medium"
+                  className="block text-base font-medium text-white"
                 >
                   Health Description
                 </label>
