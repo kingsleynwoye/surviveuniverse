@@ -122,7 +122,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Survive Universe | Health and Medical Assistant</title>
+        <title>Survive Universe | Health and Medical Platform</title>
         <meta
           name="description"
           content="Your personal companion for navigating tough times."
@@ -505,10 +505,7 @@ export default function Home() {
             </h2>
             <form onSubmit={handleFormSubmit} className="max-w-xl mx-auto">
               <div className="mb-4">
-                <label
-                  htmlFor="age"
-                  className="block text-base font-medium text-white"
-                >
+                <label htmlFor="age" className="block text-lg font-medium">
                   Age
                 </label>
                 <input
@@ -523,10 +520,7 @@ export default function Home() {
                 />
               </div>
               <div className="mb-4">
-                <label
-                  htmlFor="symptoms"
-                  className="block text-base font-medium text-white"
-                >
+                <label htmlFor="symptoms" className="block text-lg font-medium">
                   Symptoms
                 </label>
                 {/* <textarea
@@ -553,7 +547,7 @@ export default function Home() {
               <div className="mb-4">
                 <label
                   htmlFor="medicalHistory"
-                  className="block text-base font-medium text-white"
+                  className="block text-lg font-medium"
                 >
                   Medical History
                 </label>
@@ -580,7 +574,7 @@ export default function Home() {
               <div className="mb-4">
                 <label
                   htmlFor="healthDescription"
-                  className="block text-base font-medium text-white"
+                  className="block text-lg font-medium"
                 >
                   Health Description
                 </label>
