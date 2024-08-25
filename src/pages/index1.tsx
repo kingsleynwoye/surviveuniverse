@@ -10,7 +10,7 @@ export default function IndexCopy() {
   return (
     <>
       <Head>
-        <title>Survive Universe | Health and Medical Assistant</title>
+        <title>Survive Universe | Health and Medical Platform</title>
       </Head>
       {/* <Navbar /> */}
 

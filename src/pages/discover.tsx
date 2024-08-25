@@ -11,7 +11,7 @@ export default function Discover() {
   return (
     <>
       <Head>
-        <title>Survive Universe | Health and Medical Assistant</title>
+        <title>Survive Universe | Health and Medical Platform</title>
         <meta
           name="description"
           content="Your personal companion for navigating tough times."
