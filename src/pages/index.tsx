@@ -21,7 +21,7 @@ const Modal = ({
     className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 ${archivo.className}`}
   >
     <div className="bg-white text-black p-8 rounded-lg shadow-lg max-w-md mx-auto">
-      <h2 className="text-xl font-bold mb-4">Feedback</h2>
+      <h2 className="text-xl font-bold mb-4">Recommendations</h2>
       <p className="mb-6">{message}</p>
       <button
         onClick={onClose}
