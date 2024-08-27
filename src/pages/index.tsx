@@ -17,15 +17,17 @@ const Modal = ({
   message: string;
   onClose: () => void;
 }) => (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+  <div
+    className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 ${archivo.className}`}
+  >
     <div className="bg-white text-black p-8 rounded-lg shadow-lg max-w-md mx-auto">
-      <h2 className="text-xl font-bold mb-4">Chat Response</h2>
+      <h2 className="text-xl font-bold mb-4">Feedback</h2>
       <p className="mb-6">{message}</p>
       <button
         onClick={onClose}
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
       >
-        Done
+        Okay
       </button>
     </div>
   </div>
@@ -48,6 +50,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const heroRef = useRef<HTMLDivElement>(null);
   const featuresRef = useRef<HTMLDivElement>(null);
@@ -96,8 +99,10 @@ export default function Home() {
     `;
 
     if (formDataMessage.trim()) {
+      setIsLoading(true);
       const userMessage: Message = { text: formDataMessage, sender: "user" };
       setMessages([...messages, userMessage]);
+      setInput("");
 
       try {
         const response = await fetch("/api/chat", {
@@ -109,7 +114,7 @@ export default function Home() {
         });
 
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         const botMessage: Message = { text: data.text, sender: "bot" };
         setMessages([...messages, userMessage, botMessage]);
 
@@ -123,24 +128,10 @@ export default function Home() {
           sender: "bot",
         };
         setMessages([...messages, userMessage, errorMessage]);
+      } finally {
+        setIsLoading(false); // Reset loading state
       }
     }
-  };
-
-  const getHealthFeedback = (data: typeof formData) => {
-    if (data.age && data.symptoms) {
-      if (
-        parseInt(data.age) > 60 &&
-        data.symptoms.toLowerCase().includes("cough")
-      ) {
-        return "You may be at risk for severe conditions. Please consult a healthcare professional.";
-      } else if (data.symptoms.toLowerCase().includes("headache")) {
-        return "It might be a common headache, but rest, hydration, and avoiding stress may help.";
-      } else {
-        return "Consider consulting with a professional for a more accurate diagnosis.";
-      }
-    }
-    return "Please provide more information for a better assessment.";
   };
 
   return (
@@ -537,17 +528,13 @@ export default function Home() {
               </div>
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-6 py-3 rounded-md w-full"
+                className={`bg-blue-500 text-white px-4 py-3 rounded hover:bg-blue-600 w-full ${
+                  isLoading ? "cursor-wait" : "cursor-pointer"
+                }`}
               >
-                Continue
+                {isLoading ? "Sending..." : "Send"}
               </button>
             </form>
-            {isModalOpen && (
-              <Modal
-                message={modalMessage}
-                onClose={() => setIsModalOpen(false)}
-              />
-            )}
           </div>
         </section>
       </main>
@@ -557,6 +544,9 @@ export default function Home() {
           &copy; 2024 Survive Universe
         </p>
       </footer>
+      {isModalOpen && (
+        <Modal message={modalMessage} onClose={() => setIsModalOpen(false)} />
+      )}
     </>
   );
 }
