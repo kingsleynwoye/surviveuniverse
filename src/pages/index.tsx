@@ -1,28 +1,53 @@
 import { FormEvent, useState, useRef, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Archivo } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const archivo = Archivo({ subsets: ["latin"] });
 
 type Message = {
   text: string;
   sender: "user" | "bot";
 };
 
+const Modal = ({
+  message,
+  onClose,
+}: {
+  message: string;
+  onClose: () => void;
+}) => (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="bg-white text-black p-8 rounded-lg shadow-lg max-w-md mx-auto">
+      <h2 className="text-xl font-bold mb-4">Chat Response</h2>
+      <p className="mb-6">{message}</p>
+      <button
+        onClick={onClose}
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Done
+      </button>
+    </div>
+  </div>
+);
+
 export default function Home() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
+
   const texts = [
-    "How are you?",
-    "Yaya?",
-    "Kedu?",
-    "Bawo ni?",
-    "Comment ça va?",
+    "How you dey?", // Pidgin
+    "How are you?", // English
+    "Yaya?", // Spanish
+    "Kedu?", // Igbo
+    "Bawo ni?", // Yoruba
+    "Comment ça va?", // French
   ];
 
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const heroRef = useRef<HTMLDivElement>(null);
   const featuresRef = useRef<HTMLDivElement>(null);
@@ -37,37 +62,6 @@ export default function Home() {
 
     return () => clearInterval(intervalId);
   }, [texts.length]);
-
-  const handleSendMessage = async (e: FormEvent) => {
-    e.preventDefault();
-
-    if (input.trim()) {
-      const userMessage: Message = { text: input, sender: "user" };
-      setMessages([...messages, userMessage]);
-      setInput("");
-
-      try {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message: input }),
-        });
-
-        const data = await response.json();
-        const botMessage: Message = { text: data.text, sender: "bot" };
-        setMessages([...messages, userMessage, botMessage]);
-      } catch (error) {
-        console.error("Error:", error);
-        const errorMessage: Message = {
-          text: "Error getting response from bot",
-          sender: "bot",
-        };
-        setMessages([...messages, userMessage, errorMessage]);
-      }
-    }
-  };
 
   const scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
     sectionRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -91,19 +85,49 @@ export default function Home() {
     }));
   };
 
-  const handleFormSubmit = (e: FormEvent) => {
+  const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Handle health feedback logic here
-    console.log("Form Data:", formData);
-    // Simulate a bot response based on the form data
-    const feedback = `Based on your inputs, we recommend: ${getHealthFeedback(
-      formData
-    )}`;
-    setMessages([...messages, { text: feedback, sender: "bot" }]);
+
+    const formDataMessage = `
+      Age: ${formData.age}
+      Symptoms: ${formData.symptoms}
+      Medical History: ${formData.medicalHistory}
+      Health Description: ${formData.healthDescription}
+    `;
+
+    if (formDataMessage.trim()) {
+      const userMessage: Message = { text: formDataMessage, sender: "user" };
+      setMessages([...messages, userMessage]);
+
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: formDataMessage }),
+        });
+
+        const data = await response.json();
+        console.log(data);
+        const botMessage: Message = { text: data.text, sender: "bot" };
+        setMessages([...messages, userMessage, botMessage]);
+
+        // Set the response message and open the modal
+        setModalMessage(data.text);
+        setIsModalOpen(true);
+      } catch (error) {
+        console.error("Error:", error);
+        const errorMessage: Message = {
+          text: "Error getting response from bot",
+          sender: "bot",
+        };
+        setMessages([...messages, userMessage, errorMessage]);
+      }
+    }
   };
 
   const getHealthFeedback = (data: typeof formData) => {
-    // Simulate health feedback based on the form data (this can be more complex)
     if (data.age && data.symptoms) {
       if (
         parseInt(data.age) > 60 &&
@@ -132,7 +156,7 @@ export default function Home() {
       </Head>
       {/* Nav */}
       <nav
-        className={`${inter.className} bg-[#FFFFFF] fixed top-0 right-0 w-full shadow-sm px-5 z-50`}
+        className={`${archivo.className} bg-[#FFFFFF] fixed top-0 right-0 w-full shadow-sm px-5 z-50`}
       >
         <div className="h-16 flex items-center justify-between">
           {/* Left side: Logo and Nav Links */}
@@ -164,7 +188,7 @@ export default function Home() {
               <li>
                 <button
                   onClick={() => scrollToSection(featuresRef)}
-                  className="hover:text-gray-600 font-semibold"
+                  className="hover:text-gray-600 font-medium text-lg"
                 >
                   Features
                 </button>
@@ -172,7 +196,7 @@ export default function Home() {
               <li>
                 <button
                   onClick={() => scrollToSection(healthRef)}
-                  className="hover:text-gray-600 font-semibold"
+                  className="hover:text-gray-600 font-medium text-lg"
                 >
                   Health
                 </button>
@@ -180,14 +204,14 @@ export default function Home() {
               <li>
                 <button
                   onClick={() => scrollToSection(medicalRef)}
-                  className="hover:text-gray-600 font-semibold"
+                  className="hover:text-gray-600 font-medium text-lg"
                 >
                   Medical
                 </button>
               </li>
               <button
                 onClick={() => scrollToSection(getStartedRef)}
-                className="bg-black text-white px-5 py-2 rounded-full font-medium transition duration-200"
+                className="inset-0 bg-gradient-to-b from-blue-400 via-blue-300 to-blue-200 text-black px-5 py-2 rounded-full font-medium transition duration-200 text-lg"
               >
                 Get Started
               </button>
@@ -197,41 +221,6 @@ export default function Home() {
               aria-label="Toggle menu"
               onClick={() => setMenuOpen(!menuOpen)}
             >
-              {/* <svg
-                width="25"
-                height="33"
-                viewBox="0 0 25 33"
-                fill="none"
-                className="text-black"
-              >
-                <line
-                  x1="1.04297"
-                  y1="12.75"
-                  x2="23.543"
-                  y2="12.75"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                ></line>
-                <line
-                  x1="1.04297"
-                  y1="16.75"
-                  x2="23.543"
-                  y2="16.75"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                ></line>
-                <line
-                  x1="1.04297"
-                  y1="20.75"
-                  x2="23.543"
-                  y2="20.75"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                ></line>
-              </svg> */}
               <svg
                 width="30"
                 height="16"
@@ -257,7 +246,7 @@ export default function Home() {
                   scrollToSection(featuresRef);
                   setMenuOpen(false);
                 }}
-                className="font-semibold text-gray-800 hover:text-gray-600"
+                className="text-lg font-medium text-gray-800 hover:text-gray-600"
               >
                 Features
               </button>
@@ -268,7 +257,7 @@ export default function Home() {
                   scrollToSection(healthRef);
                   setMenuOpen(false);
                 }}
-                className="font-semibold text-gray-800 hover:text-gray-600"
+                className="text-lg font-medium text-gray-800 hover:text-gray-600"
               >
                 Health
               </button>
@@ -279,7 +268,7 @@ export default function Home() {
                   scrollToSection(medicalRef);
                   setMenuOpen(false);
                 }}
-                className="font-semibold text-gray-800 hover:text-gray-600"
+                className="text-lg font-medium text-gray-800 hover:text-gray-600"
               >
                 Medical
               </button>
@@ -290,7 +279,7 @@ export default function Home() {
                   scrollToSection(getStartedRef);
                   setMenuOpen(false);
                 }}
-                className="bg-black text-white px-5 py-2 rounded-full font-medium transition duration-200"
+                className="inset-0 bg-gradient-to-b from-blue-400 via-blue-300 to-blue-200 text-black px-5 py-2 rounded-full text-lg font-medium transition duration-200"
               >
                 Get Started
               </button>
@@ -299,68 +288,45 @@ export default function Home() {
         )}
       </nav>
       {/* Main Content */}
-      <main className={`${inter.className}`}>
+      <main className={`${archivo.className}`}>
         {/* Hero Content */}
         <section
           ref={heroRef}
-          className="bg-[#0C513F] h-[50vh] md:h-[60vh] flex items-center justify-center mt-16"
+          className="inset-0 bg-gradient-to-b from-blue-400 via-blue-300 to-blue-200"
         >
-          <div className="container max-w-6xl mx-auto md:px-20 flex flex-col items-center justify-center text-center space-y-10">
-            <h1 className="text-4xl md:text-8xl font-extrabold text-white">
-              {texts[currentTextIndex]}
-            </h1>
-            {/* <div className="relative text-gray-600">
-              <input
-                type="search"
-                name="search"
-                placeholder="Search Health, Medical..."
-                className="bg-white h-14 px-6 pr-16 rounded-full text-lg focus:outline-none"
-              />
+          <div className="h-[50vh] md:h-[60vh] flex items-center justify-center mt-16">
+            <div className="container max-w-6xl mx-auto md:px-20 flex flex-col items-center justify-center text-center space-y-5">
+              <h1 className="text-4xl md:text-8xl font-extrabold text-black">
+                {texts[currentTextIndex]}
+              </h1>
+              <p className="text-lg text-black max-w-3xl">
+                Check your health to get medical recommendations.
+              </p>
               <button
-                type="submit"
-                className="absolute right-0 top-0 mt-4 mr-5"
+                onClick={() => scrollToSection(getStartedRef)}
+                className="inset-0 bg-gradient-to-b from-blue-400 via-blue-300 to-blue-200 text-black px-12 py-4 rounded-full font-medium transition duration-200 shadow-2xl"
               >
-                <svg
-                  className="h-6 w-6 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  version="1.1"
-                  id="Capa_1"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 56.966 56.966"
-                  xmlSpace="preserve"
-                  width="512px"
-                  height="512px"
-                >
-                  <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                </svg>
+                Get Started
               </button>
-            </div> */}
-            <button
-              onClick={() => scrollToSection(getStartedRef)}
-              className="bg-black text-white px-14 py-4 rounded-full font-medium transition duration-200"
-            >
-              Get Started
-            </button>
+            </div>
           </div>
         </section>
         {/* Features Content */}
-        <section ref={featuresRef} className="bg-[#e9c0e9] py-20">
-          <div className="container mx-auto px-6 md:px-20">
+        <section ref={featuresRef} className="bg-[#e9c0e9]">
+          <div className="container mx-auto px-6 md:px-20 py-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-black">
               Features
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {/* Feature 1: Personalized Health Guidance */}
-              <div className="bg-[#F1F5F9] p-8 rounded-2xl shadow-md text-center">
-                <Image
+              <div className="bg-white p-8 rounded-3xl shadow-md text-center">
+                {/* <Image
                   src="/guidance-icon.png"
                   alt="Personalized Health Guidance"
                   width={60}
                   height={60}
                   className="mx-auto mb-6"
-                />
+                /> */}
                 <h3 className="text-xl font-semibold mb-4 text-black">
                   Personalized Health Guidance
                 </h3>
@@ -370,14 +336,14 @@ export default function Home() {
                 </p>
               </div>
               {/* Feature 2: Medical Resources */}
-              <div className="bg-[#F1F5F9] p-8 rounded-2xl shadow-md text-center">
-                <Image
+              <div className="bg-white p-8 rounded-3xl shadow-md text-center">
+                {/* <Image
                   src="/resources-icon.png"
                   alt="Medical Resources"
                   width={60}
                   height={60}
                   className="mx-auto mb-6"
-                />
+                /> */}
                 <h3 className="text-xl font-semibold mb-4 text-black">
                   Medical Resources
                 </h3>
@@ -387,14 +353,14 @@ export default function Home() {
                 </p>
               </div>
               {/* Feature 3: 24/7 Chat Support */}
-              <div className="bg-[#F1F5F9] p-8 rounded-2xl shadow-md text-center">
-                <Image
+              <div className="bg-white p-8 rounded-3xl shadow-md text-center">
+                {/* <Image
                   src="/chat-icon.png"
                   alt="24/7 Chat Support"
                   width={60}
                   height={60}
                   className="mx-auto mb-6"
-                />
+                /> */}
                 <h3 className="text-xl font-semibold mb-4 text-black">
                   24/7 Chat Support
                 </h3>
@@ -407,21 +373,21 @@ export default function Home() {
           </div>
         </section>
         {/* Health Content */}
-        <section ref={healthRef} className="bg-[#8c77ec] py-20">
-          <div className="container mx-auto px-6 md:px-20">
+        <section ref={healthRef} className="bg-[#8c77ec]">
+          <div className="container mx-auto px-6 md:px-20 py-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-black">
               Health is Wealth
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* Health Assistance */}
-              <div className="bg-white p-8 rounded-2xl shadow-md">
-                <Image
+              <div className="bg-white p-8 rounded-3xl shadow-md">
+                {/* <Image
                   src="/health-icon.png"
                   alt="Health Assistance"
                   width={60}
                   height={60}
                   className="mx-auto mb-6"
-                />
+                /> */}
                 <h3 className="text-xl font-semibold mb-4 text-black text-center">
                   Health Assistance
                 </h3>
@@ -432,14 +398,14 @@ export default function Home() {
                 </p>
               </div>
               {/* Health Monitoring */}
-              <div className="bg-white p-8 rounded-2xl shadow-md">
-                <Image
+              <div className="bg-white p-8 rounded-3xl shadow-md">
+                {/* <Image
                   src="/monitoring-icon.png"
                   alt="Health Monitoring"
                   width={60}
                   height={60}
                   className="mx-auto mb-6"
-                />
+                /> */}
                 <h3 className="text-xl font-semibold mb-4 text-black text-center">
                   Health Monitoring
                 </h3>
@@ -453,21 +419,21 @@ export default function Home() {
           </div>
         </section>
         {/* Medical Content */}
-        <section ref={medicalRef} className="bg-[#ff884d] py-20">
-          <div className="container mx-auto px-6 md:px-20">
+        <section ref={medicalRef} className="bg-[#ff884d]">
+          <div className="container mx-auto px-6 md:px-20 py-20">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-black">
               Medical is Vitamin
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* Medical Consultation */}
-              <div className="bg-white p-8 rounded-2xl shadow-md">
-                <Image
+              <div className="bg-white p-8 rounded-3xl shadow-md">
+                {/* <Image
                   src="/consultation-icon.png"
                   alt="Medical Consultation"
                   width={60}
                   height={60}
                   className="mx-auto mb-6"
-                />
+                /> */}
                 <h3 className="text-xl font-semibold mb-4 text-black text-center">
                   Medical Consultation
                 </h3>
@@ -478,14 +444,14 @@ export default function Home() {
                 </p>
               </div>
               {/* Prescription Assistance */}
-              <div className="bg-white p-8 rounded-2xl shadow-md">
-                <Image
+              <div className="bg-white p-8 rounded-3xl shadow-md">
+                {/* <Image
                   src="/prescription-icon.png"
                   alt="Prescription Assistance"
                   width={60}
                   height={60}
                   className="mx-auto mb-6"
-                />
+                /> */}
                 <h3 className="text-xl font-semibold mb-4 text-black text-center">
                   Prescription Assistance
                 </h3>
@@ -498,10 +464,10 @@ export default function Home() {
           </div>
         </section>
         {/* Get Started Section */}
-        <section ref={getStartedRef} className="bg-[#000000] py-20">
-          <div className="px-6">
+        <section ref={getStartedRef} className="bg-[#000000]">
+          <div className="px-6 py-20">
             <h2 className="text-3xl font-bold text-center mb-8 text-white">
-              Get Started with Your Health Check
+              Get Started
             </h2>
             <form onSubmit={handleFormSubmit} className="max-w-xl mx-auto">
               <div className="mb-4">
@@ -523,16 +489,6 @@ export default function Home() {
                 <label htmlFor="symptoms" className="block text-lg font-medium">
                   Symptoms
                 </label>
-                {/* <textarea
-                id="symptoms"
-                name="symptoms"
-                value={formData.symptoms}
-                onChange={handleFormChange}
-                className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
-                placeholder="Your symptoms eg: Headache"
-                rows={4}
-                required
-              /> */}
                 <input
                   type="text"
                   id="symptoms"
@@ -551,15 +507,6 @@ export default function Home() {
                 >
                   Medical History
                 </label>
-                {/* <textarea
-                id="medicalHistory"
-                name="medicalHistory"
-                value={formData.medicalHistory}
-                onChange={handleFormChange}
-                className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
-                placeholder="Your medical history eg: Allergy"
-                rows={4}
-              /> */}
                 <input
                   type="text"
                   id="medicalHistory"
@@ -567,7 +514,7 @@ export default function Home() {
                   value={formData.medicalHistory}
                   onChange={handleFormChange}
                   className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
-                  placeholder="Your medical history eg: Allergy"
+                  placeholder="Your medical history eg: Allergies"
                   required
                 />
               </div>
@@ -590,34 +537,26 @@ export default function Home() {
               </div>
               <button
                 type="submit"
-                className="bg-green-500 text-white px-6 py-3 rounded-md w-full"
+                className="bg-blue-500 text-white px-6 py-3 rounded-md w-full"
               >
-                Get Feedback
+                Continue
               </button>
             </form>
-
-            {/* <div className="mt-8">
-              <h3 className="text-2xl font-semibold">Chat History</h3>
-              <div className="mt-4 space-y-3">
-                {messages.map((message, index) => (
-                  <div
-                    key={index}
-                    className={`p-3 rounded-md ${
-                      message.sender === "user" ? "bg-gray-200" : "bg-blue-200"
-                    }`}
-                  >
-                    {message.text}
-                  </div>
-                ))}
-              </div>
-            </div> */}
+            {isModalOpen && (
+              <Modal
+                message={modalMessage}
+                onClose={() => setIsModalOpen(false)}
+              />
+            )}
           </div>
         </section>
       </main>
       {/* Footer */}
-      {/* <footer className={`bg-[#000000] py-2 text-center ${inter.className}`}>
-        <p className="text-white">&copy; 2024 Survive Universe</p>
-      </footer> */}
+      <footer className={`bg-[#000000] ${archivo.className}`}>
+        <p className="text-white py-2 text-center">
+          &copy; 2024 Survive Universe
+        </p>
+      </footer>
     </>
   );
 }
