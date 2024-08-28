@@ -215,7 +215,7 @@ export default function Home() {
         <title>Survive Universe | Health and Medical Platform</title>
         <meta
           name="description"
-          content="Survive Universe is a personalize health and medical platform."
+          content="Survive Universe is a health and medical platform."
         />
         <meta name="viewport" content="width=deviceWidth, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -587,7 +587,7 @@ export default function Home() {
                 Get Started
               </h2>
               <p className="text-gray-400">
-                Fill with correct infomormatin to get best results
+                Fill with correct information to get best results.
               </p>
             </div>
 
