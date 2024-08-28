@@ -20,12 +20,12 @@ const Modal = ({
   <div
     className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-5 ${archivo.className}`}
   >
-    <div className="bg-white text-[#06281C] p-5 rounded-lg shadow-lg max-w-md mx-auto">
+    <div className="bg-white text-[#06281C] p-5 rounded-lg shadow-lg max-w-xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Recommendations</h2>
-      <p className="mb-6">{message}</p>
+      <p className="mb-6 text-black">{message}</p>
       <button
         onClick={onClose}
-        className="bg-[#234338] text-white px-4 py-2 rounded"
+        className="bg-[#234338] text-white px-5 py-2 rounded"
       >
         Close
       </button>
@@ -128,6 +128,14 @@ export default function Home() {
         setMessages([...messages, userMessage, errorMessage]);
       } finally {
         setIsLoading(false); // Reset loading state
+
+        // Reset form data to empty strings
+        setFormData({
+          age: "",
+          symptoms: "",
+          medicalHistory: "",
+          healthDescription: "",
+        });
       }
     }
   };
