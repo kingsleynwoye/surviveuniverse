@@ -217,14 +217,14 @@ export default function Home() {
           {/* Right side: Auth Links */}
           <div className="flex items-center space-x-4">
             {/* Nav Links */}
-            <ul className="hidden md:flex items-center space-x-6 text-[#06281C]">
+            <ul className="hidden md:flex items-center space-x-6">
               <li>
                 <button
                   onClick={() => {
                     scrollToSection(featuresRef);
                     setMenuOpen(false);
                   }}
-                  className="hover:text-gray-600 font-medium text-lg"
+                  className="text-[#06281C] font-medium text-lg"
                 >
                   Features
                 </button>
@@ -235,7 +235,7 @@ export default function Home() {
                     scrollToSection(healthRef);
                     setMenuOpen(false);
                   }}
-                  className="hover:text-gray-600 font-medium text-lg"
+                  className="text-[#06281C] font-medium text-lg"
                 >
                   Health
                 </button>
@@ -246,7 +246,7 @@ export default function Home() {
                     scrollToSection(medicalRef);
                     setMenuOpen(false);
                   }}
-                  className="hover:text-gray-600 font-medium text-lg"
+                  className="text-[#06281C] font-medium text-lg"
                 >
                   Medical
                 </button>
@@ -284,14 +284,14 @@ export default function Home() {
 
         {/* Mobile Nav Links */}
         {menuOpen && (
-          <ul className="md:hidden bg-white flex flex-col items-start space-y-4 pb-4 shadow-sm text-[#06281C]">
+          <ul className="md:hidden bg-white flex flex-col items-start space-y-4 pb-4 shadow-sm">
             <li>
               <button
                 onClick={() => {
                   scrollToSection(featuresRef);
                   setMenuOpen(false);
                 }}
-                className="text-lg font-medium text-gray-800 hover:text-gray-600"
+                className="text-lg font-medium text-[#06281C]"
               >
                 Features
               </button>
@@ -302,7 +302,7 @@ export default function Home() {
                   scrollToSection(healthRef);
                   setMenuOpen(false);
                 }}
-                className="text-lg font-medium text-gray-800 hover:text-gray-600"
+                className="text-lg font-medium text-[#06281C]"
               >
                 Health
               </button>
@@ -313,7 +313,7 @@ export default function Home() {
                   scrollToSection(medicalRef);
                   setMenuOpen(false);
                 }}
-                className="text-lg font-medium text-gray-800 hover:text-gray-600"
+                className="text-lg font-medium text-[#06281C]"
               >
                 Medical
               </button>
