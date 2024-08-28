@@ -444,7 +444,8 @@ export default function Home() {
                   className="mx-auto mb-6"
                 />
                 <h3 className="text-xl font-semibold mb-4 text-[#06281C]">
-                  Personalized Health Guidance
+                  {/* Personalized Health Guidance */}
+                  Personalized Health Recommendation
                 </h3>
                 <p className="text-gray-600">
                   Receive advice tailored to your specific health needs, helping
