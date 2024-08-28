@@ -2,6 +2,7 @@ import { FormEvent, useState, useRef, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Archivo } from "next/font/google";
+import jsPDF from "jspdf";
 
 const archivo = Archivo({ subsets: ["latin"] });
 
@@ -16,22 +17,90 @@ const Modal = ({
 }: {
   message: string;
   onClose: () => void;
-}) => (
-  <div
-    className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-5 ${archivo.className}`}
-  >
-    <div className="bg-white text-[#06281C] p-5 rounded-lg shadow-lg max-w-xl mx-auto">
-      <h2 className="text-xl font-bold mb-4">Recommendations</h2>
-      <p className="mb-6 text-black">{message}</p>
-      <button
-        onClick={onClose}
-        className="bg-[#234338] text-white px-5 py-2 rounded"
-      >
-        Close
-      </button>
+}) => {
+  const saveHandle = () => {
+    const doc = new jsPDF();
+
+    // Set the title of the document
+    doc.setFont("helvetica");
+    doc.setFontSize(20);
+    doc.text("Recommendations", 20, 20);
+
+    // Add the message content
+    doc.setFontSize(12);
+    doc.text(message, 20, 40);
+
+    // Save the PDF with a specific name
+    doc.save("recommendations.pdf");
+  };
+
+  // Function to read out the message
+  const readMessage = () => {
+    const utterance = new SpeechSynthesisUtterance(message);
+    window.speechSynthesis.speak(utterance);
+  };
+
+  return (
+    <div
+      className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-5 ${archivo.className}`}
+    >
+      <div className="bg-white text-[#06281C] p-5 rounded-3xl shadow-lg max-w-xl mx-auto">
+        <div className="flex items-center justify-between mb-5">
+          <h3 className="text-2xl font-bold">Recommendations</h3>
+          <button
+            className="bg-[#234338] p-2 w-8 h-8 flex items-center rounded-full"
+            onClick={onClose}
+          >
+            <svg
+              width="44"
+              height="45"
+              viewBox="0 0 44 45"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+            >
+              <rect width="44" height="45" fill="url(#pattern0_16_9453)" />
+              <defs>
+                <pattern
+                  id="pattern0_16_9453"
+                  patternContentUnits="objectBoundingBox"
+                  width="1"
+                  height="1"
+                >
+                  <use
+                    xlinkHref="#image0_16_9453"
+                    transform="matrix(0.0104167 0 0 0.0101852 0 0.0111111)"
+                  />
+                </pattern>
+                <image
+                  id="image0_16_9453"
+                  width="96"
+                  height="96"
+                  xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAACZ0lEQVR4nO2dO27bUBBFh95AkK3YhVOmCQJ4Q3Znl9lamuwkgbKC60IeYExY1vuR82Z4D6BOJIfnkKBAPEAihBBCCCGEEEIIIYSQWAB4AnDvPcfWALgH8OQ9xzsAvODMCcA373m2AsAdgH9v5/rLex4ReScfmSOs5GOKCB/ITxnhgnzfCJ/ITxXhinyfCDg/cEs4IfCDGecH7qnwXPd7MAO4BfC3IkK4OwFlV77fhZY5wvTyzaDpIoSRbwZOEyGcfCVDhLDylcgRwstXIkZII1+JFCGdfCVChLTylZkjpJevzBjhMPKVmSIcTr4yQ4TDylc8IxxevuIRgfJX7BmB8i+wRwTKv8KWESi/kC0iUH4lIyNQfiMjIlB+Jz0RKH8QLREofzCoW4tzqvwu5ZeAujuB8rdgYATKb2VABMrvpSMC5Y+iIUIY+TfeAxSyvH1qtyG9oO53/voucF93FJoO+YzQywD5jNDKQPmMUAv4KsIPNLxYwwRLXlLQIt9sywg99Mg3+2CEFkbIN/tihBpGyjf7ZIQStpBv9s0In7GlfHMMRviIPeSbYzGCZU/55piMIOK7dOTwETzlmxmOGWEG+WaWY0WYSb6Z6RgRZpRvZssdYWb5ZsacESLIN7PmihBJvpk5R4SI8pXwESLLV8JGyCBfCRchk3wlTISM8pXpI2SWr+wVoXVx7g8R+Vrwvf8i8nNZlt+Nx3FjWZY/IvIg53O4xhcR+b7tRCsAPGa88tcU3gnPXsNdipBCvnIlgo98M9w6Qir5yoUIvvIVEyGlfGUVYQ75CvgnPoQQQgghhBBCCCGEkJl5BVu5aGpI3grTAAAAAElFTkSuQmCC"
+                />
+              </defs>
+            </svg>
+          </button>
+        </div>
+        <p className="mb-6 text-black">{message}</p>
+        <div className="flex gap-5">
+          <button
+            onClick={readMessage}
+            className="bg-[#234338] text-white w-full h-12 rounded-full"
+          >
+            Read
+          </button>
+          <button
+            onClick={saveHandle}
+            className="bg-[#234338] text-white w-full h-12 rounded-full"
+          >
+            Save
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function Home() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -146,7 +215,7 @@ export default function Home() {
         <title>Survive Universe | Health and Medical Platform</title>
         <meta
           name="description"
-          content="Survive Universe is a health and medical platform that guides users for navigating tough times."
+          content="Survive Universe is a personalize health and medical platform."
         />
         <meta name="viewport" content="width=deviceWidth, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -353,7 +422,7 @@ export default function Home() {
                 onClick={() => scrollToSection(getStartedRef)}
                 className="bg-[#234338] text-white px-12 h-12 rounded-full font-medium transition duration-200 shadow-2xl"
               >
-                Let&apos;s check it
+                Get Started
               </button>
             </div>
           </div>
@@ -513,9 +582,15 @@ export default function Home() {
         {/* Get Started Section */}
         <section ref={getStartedRef} className="bg-[#000000]">
           <div className="px-6 py-20">
-            <h2 className="text-3xl font-bold text-center mb-8 text-white">
-              Get Started
-            </h2>
+            <div className="text-center mb-8 space-y-2">
+              <h2 className="text-3xl font-bold text-center text-white">
+                Get Started
+              </h2>
+              <p className="text-gray-400">
+                Fill with correct infomormatin to get best results
+              </p>
+            </div>
+
             <form onSubmit={handleFormSubmit} className="max-w-xl mx-auto">
               <div className="mb-4">
                 <label htmlFor="age" className="block text-lg font-medium">
