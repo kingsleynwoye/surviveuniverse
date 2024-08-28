@@ -353,7 +353,7 @@ export default function Home() {
                 onClick={() => scrollToSection(getStartedRef)}
                 className="bg-[#234338] text-white px-12 h-12 rounded-full font-medium transition duration-200 shadow-2xl"
               >
-                Let's check it
+                Let&apos;s check it
               </button>
             </div>
           </div>
