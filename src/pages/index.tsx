@@ -371,7 +371,7 @@ export default function Home() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* Health Assistance */}
-              <div className="bg-[#FFFFFF] p-8 rounded-3xl shadow-md">
+              <div className="bg-[#234338] p-8 rounded-3xl shadow-md">
                 <Image
                   src="/health-icon.svg"
                   alt="Health Assistance"
@@ -379,17 +379,17 @@ export default function Home() {
                   height={60}
                   className="mx-auto mb-6"
                 />
-                <h3 className="text-xl font-semibold mb-4 text-[#06281C] text-center">
+                <h3 className="text-xl font-semibold mb-4 text-[#FFFFFF] text-center">
                   Health Assistance
                 </h3>
-                <p className="text-gray-600 text-center">
+                <p className="text-gray-400 text-center">
                   Our platform offers comprehensive health assistance to guide
                   you through your wellness journey. From fitness tips to diet
                   recommendations, we have you covered.
                 </p>
               </div>
               {/* Health Monitoring */}
-              <div className="bg-[#FFFFFF] p-8 rounded-3xl shadow-md">
+              <div className="bg-[#234338] p-8 rounded-3xl shadow-md">
                 <Image
                   src="/health-icon.svg"
                   alt="Health Assistance"
@@ -397,10 +397,10 @@ export default function Home() {
                   height={60}
                   className="mx-auto mb-6"
                 />
-                <h3 className="text-xl font-semibold mb-4 text-[#06281C] text-center">
+                <h3 className="text-xl font-semibold mb-4 text-[#FFFFFF] text-center">
                   Health Monitoring
                 </h3>
-                <p className="text-gray-600 text-center">
+                <p className="text-gray-400 text-center">
                   Monitor your health metrics with our advanced tracking tools.
                   Keep an eye on your progress and stay motivated with real-time
                   updates.
@@ -541,11 +541,11 @@ export default function Home() {
       {/* Footer */}
       <footer className={`bg-[#000000] ${archivo.className}`}>
         <div className="flex items-center justify-between p-5 h-16">
-          <p className="text-white py-2 text-center">
+          <p className="text-white py-2 text-base">
             &copy; 2024 Survive Universe
           </p>
           <div className="flex items-center gap-2">
-            <p className="text-white py-2 text-center">Got To Top</p>
+            <p className="text-white py-2 text-base">Got To Top</p>
             <svg
               width="48"
               height="48"
