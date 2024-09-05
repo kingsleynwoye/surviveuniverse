@@ -44,11 +44,11 @@ const Modal = ({
     <div
       className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-5 ${archivo.className}`}
     >
-      <div className="bg-white text-[#00319d] p-5 rounded-3xl shadow-lg max-w-xl mx-auto">
+      <div className="bg-white text-[#00319d] p-5 rounded-none shadow-lg max-w-xl mx-auto">
         <div className="flex items-center justify-between mb-5">
           <h3 className="text-2xl font-bold">Recommendations</h3>
           <button
-            className="bg-[#7ccf24] p-2 w-8 h-8 flex items-center rounded-full"
+            className="bg-[#7ccf24] p-2 w-7 h-7 flex items-center rounded-full"
             onClick={onClose}
           >
             <svg
@@ -140,10 +140,10 @@ export default function Home() {
 
   // Form state management
   const [formData, setFormData] = useState({
-    age: "",
-    symptoms: "",
-    medicalHistory: "",
-    healthDescription: "",
+    age: "20years",
+    symptoms: "Headache",
+    medicalHistory: "Allergies",
+    healthDescription: "I'm having Fever",
   });
 
   const handleFormChange = (
@@ -687,7 +687,7 @@ export default function Home() {
                   name="age"
                   value={formData.age}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 rounded-none text-white outline-none bg-white"
+                  className="w-full px-4 py-3 rounded-none text-black outline-none bg-white"
                   placeholder="Your age eg: 20years"
                   required
                 />
@@ -705,7 +705,7 @@ export default function Home() {
                   name="symptoms"
                   value={formData.symptoms}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 rounded-none text-white outline-none bg-white"
+                  className="w-full px-4 py-3 rounded-none text-black outline-none bg-white"
                   placeholder="Your symptoms eg: Headache"
                   required
                 />
@@ -723,7 +723,7 @@ export default function Home() {
                   name="medicalHistory"
                   value={formData.medicalHistory}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 rounded-none text-white outline-none bg-white"
+                  className="w-full px-4 py-3 rounded-none text-black outline-none bg-white"
                   placeholder="Your medical history eg: Allergies"
                   required
                 />
@@ -740,7 +740,7 @@ export default function Home() {
                   name="healthDescription"
                   value={formData.healthDescription}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 rounded-none text-white outline-none bg-white"
+                  className="w-full px-4 py-3 rounded-none text-black outline-none bg-white"
                   placeholder="Your health description eg: I'm having Fever"
                   rows={4}
                 />
