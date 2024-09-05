@@ -212,17 +212,17 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Survive Universe - Health and Medical Assistance</title>
+        <title>Survive Universe - Ace your sicknesses</title>
         <meta
           name="description"
-          content="Prepare for your next healthcare and medical life with Survive Universe! Sharpen your skills, receive personalized guidance, and get real-time feedback tailored to the medical field."
+          content="Take control of your health with Survive Universe! Get expert guidance, personalized care, and real-time support to tackle any illness and stay on top of your well-being."
         />
         <meta name="viewport" content="width=deviceWidth, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* Nav */}
       <nav
-        className={`${archivo.className} bg-[#FFFFFF] fixed top-0 right-0 w-full shadow-sm px-5 z-50`}
+        className={`${archivo.className} bg-white fixed top-0 right-0 w-full shadow-sm px-5 z-50`}
       >
         <div className="h-16 flex items-center justify-between">
           {/* Left side: Logo and Nav Links */}
@@ -393,13 +393,12 @@ export default function Home() {
               <h1 className="text-4xl md:text-8xl font-extrabold text-[#FFFFFF]">
                 {texts[currentTextIndex]}
               </h1>
-              <p className="text-lg text-[#FFFFFF] max-w-3xl">
-                {/* Check your health to get medical recommendations. */}
+              <p className="text-lg text-[#fff9] max-w-3xl">
                 We care about your Health.
               </p>
               <button
                 onClick={() => scrollToSection(getStartedRef)}
-                className="bg-[#7ccf24] text-[#00319d] px-12 h-12 rounded-full font-medium transition duration-200 shadow-2xl"
+                className="bg-[#7ccf24] text-[#00319d] px-12 h-12 rounded-none font-medium transition duration-200 shadow-2xl"
               >
                 Get Started
               </button>
@@ -407,56 +406,164 @@ export default function Home() {
           </div>
         </section>
         {/* Features Content */}
-        <section ref={featuresRef} className="bg-[#FFFFFF]">
+        <section ref={featuresRef} className="bg-[#00319d]">
           <div className="container mx-auto px-6 md:px-20 py-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#00319d]">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-[#7ccf24]">
               Features
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              <div className="bg-[#EEF8D3] p-8 rounded-3xl shadow-md text-center">
-                <Image
+              <div className="bg-transparent p-8 rounded-none border">
+                {/* <Image
                   src="/health-icon.svg"
                   alt="Health Assistance"
                   width={60}
                   height={60}
-                  className="mx-auto mb-6"
-                />
-                <h3 className="text-xl font-semibold mb-4 text-[#00319d]">
+                  className="mb-6"
+                /> */}
+                <svg
+                  width="41"
+                  height="40"
+                  viewBox="0 0 41 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    opacity="0.2"
+                    d="M22.3335 6.81066L35.5228 20L22.3335 33.1893V27.5V26.75H21.5835H17.3335V13.25H21.5835H22.3335V12.5V6.81066Z"
+                    fill="#B1FF5C"
+                    stroke="#B1FF5C"
+                    strokeWidth="1.5"
+                  ></path>
+                  <path
+                    d="M21.5835 5L36.5835 20L21.5835 35V27.5H16.5835V12.5H21.5835V5Z"
+                    stroke="#B1FF5C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                  <path
+                    d="M6.5835 27.5V12.5"
+                    stroke="#B1FF5C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                  <path
+                    d="M11.5835 27.5V12.5"
+                    stroke="#B1FF5C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                </svg>
+                <h3 className="text-xl font-semibold my-4 text-[#e3f6cf]">
                   Master Every Topic
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-[#fff9]">
                   Sharpen your answer to every question through our AI-powered
                   interview
                 </p>
               </div>
-              <div className="bg-[#EEF8D3] p-8 rounded-3xl shadow-md text-center">
-                <Image
+              <div className="bg-transparent p-8 rounded-none border">
+                {/* <Image
                   src="/health-icon.svg"
                   alt="Health Assistance"
                   width={60}
                   height={60}
-                  className="mx-auto mb-6"
-                />
-                <h3 className="text-xl font-semibold mb-4 text-[#00319d]">
+                  className="mb-6"
+                /> */}
+                <svg
+                  width="41"
+                  height="40"
+                  viewBox="0 0 41 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    opacity="0.2"
+                    d="M22.3335 6.81066L35.5228 20L22.3335 33.1893V27.5V26.75H21.5835H17.3335V13.25H21.5835H22.3335V12.5V6.81066Z"
+                    fill="#B1FF5C"
+                    stroke="#B1FF5C"
+                    strokeWidth="1.5"
+                  ></path>
+                  <path
+                    d="M21.5835 5L36.5835 20L21.5835 35V27.5H16.5835V12.5H21.5835V5Z"
+                    stroke="#B1FF5C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                  <path
+                    d="M6.5835 27.5V12.5"
+                    stroke="#B1FF5C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                  <path
+                    d="M11.5835 27.5V12.5"
+                    stroke="#B1FF5C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                </svg>
+                <h3 className="text-xl font-semibold my-4 text-[#e3f6cf]">
                   Tailored Recommendation
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-[#fff9]">
                   Get expert advice on how to show your expertise in each
                   question effectively
                 </p>
               </div>
-              <div className="bg-[#EEF8D3] p-8 rounded-3xl shadow-md text-center">
-                <Image
+              <div className="bg-transparent p-8 rounded-none border">
+                {/* <Image
                   src="/health-icon.svg"
                   alt="Health Assistance"
                   width={60}
                   height={60}
-                  className="mx-auto mb-6"
-                />
-                <h3 className="text-xl font-semibold mb-4 text-[#00319d]">
+                  className="mb-6"
+                /> */}
+                <svg
+                  width="41"
+                  height="40"
+                  viewBox="0 0 41 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    opacity="0.2"
+                    d="M22.3335 6.81066L35.5228 20L22.3335 33.1893V27.5V26.75H21.5835H17.3335V13.25H21.5835H22.3335V12.5V6.81066Z"
+                    fill="#B1FF5C"
+                    stroke="#B1FF5C"
+                    strokeWidth="1.5"
+                  ></path>
+                  <path
+                    d="M21.5835 5L36.5835 20L21.5835 35V27.5H16.5835V12.5H21.5835V5Z"
+                    stroke="#B1FF5C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                  <path
+                    d="M6.5835 27.5V12.5"
+                    stroke="#B1FF5C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                  <path
+                    d="M11.5835 27.5V12.5"
+                    stroke="#B1FF5C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                </svg>
+                <h3 className="text-xl font-semibold my-4 text-[#e3f6cf]">
                   Real-Time Feedback
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-[#fff9]">
                   Improve your answers through real-time feedback
                 </p>
               </div>
@@ -466,12 +573,12 @@ export default function Home() {
         {/* Health Content */}
         <section ref={healthRef} className="bg-[#00319d]">
           <div className="container mx-auto px-6 md:px-20 py-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#FFFFFF]">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-[#7ccf24]">
               Health is Wealth
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* Health Assistance */}
-              <div className="bg-[#7ccf24] p-8 rounded-3xl shadow-md">
+              {/* <div className="bg-[#7ccf24] p-8 rounded-3xl shadow-md">
                 <Image
                   src="/health-icon.svg"
                   alt="Health Assistance"
@@ -487,9 +594,9 @@ export default function Home() {
                   you through your wellness journey. From fitness tips to diet
                   recommendations, we have you covered.
                 </p>
-              </div>
+              </div> */}
               {/* Health Monitoring */}
-              <div className="bg-[#7ccf24] p-8 rounded-3xl shadow-md">
+              {/* <div className="bg-[#7ccf24] p-8 rounded-3xl shadow-md">
                 <Image
                   src="/health-icon.svg"
                   alt="Health Assistance"
@@ -505,19 +612,19 @@ export default function Home() {
                   Keep an eye on your progress and stay motivated with real-time
                   updates.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
         {/* Medical Content */}
-        <section ref={medicalRef} className="bg-[#FFFFFF]">
+        <section ref={medicalRef} className="bg-[#00319d]">
           <div className="container mx-auto px-6 md:px-20 py-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#00319d]">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-[#7ccf24]">
               Medical is Vitamin
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* Medical Consultation */}
-              <div className="bg-[#EEF8D3] p-8 rounded-3xl shadow-md">
+              {/* <div className="bg-[#EEF8D3] p-8 rounded-3xl shadow-md">
                 <Image
                   src="/health-icon.svg"
                   alt="Health Assistance"
@@ -528,14 +635,14 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4 text-[#00319d] text-center">
                   Medical Consultation
                 </h3>
-                <p className="text-gray-600 text-center">
+                <p className="text-[#fff9] text-center">
                   Get expert medical consultations through our platform. Speak
                   to qualified professionals who can provide you with the
                   assistance you need.
                 </p>
-              </div>
+              </div> */}
               {/* Prescription Assistance */}
-              <div className="bg-[#EEF8D3] p-8 rounded-3xl shadow-md">
+              {/* <div className="bg-[#EEF8D3] p-8 rounded-3xl shadow-md">
                 <Image
                   src="/health-icon.svg"
                   alt="Health Assistance"
@@ -546,16 +653,16 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4 text-[#00319d] text-center">
                   Prescription Assistance
                 </h3>
-                <p className="text-gray-600 text-center">
+                <p className="text-[#fff9] text-center">
                   Obtain guidance on prescriptions and medications with ease.
                   Our platform helps you manage your medication effectively.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
         {/* Get Started Section */}
-        <section ref={getStartedRef} className="bg-[#000000]">
+        <section ref={getStartedRef} className="bg-[#00319d]">
           <div className="px-6 py-20">
             <div className="text-center mb-8 space-y-2">
               <h2 className="text-3xl font-bold text-center text-white">
@@ -568,7 +675,10 @@ export default function Home() {
 
             <form onSubmit={handleFormSubmit} className="max-w-xl mx-auto">
               <div className="mb-4">
-                <label htmlFor="age" className="block text-lg font-medium">
+                <label
+                  htmlFor="age"
+                  className="block text-lg font-medium text-gray-400"
+                >
                   Age
                 </label>
                 <input
@@ -577,13 +687,16 @@ export default function Home() {
                   name="age"
                   value={formData.age}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                  className="w-full px-4 py-3 rounded-none text-white outline-none bg-white"
                   placeholder="Your age eg: 20years"
                   required
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="symptoms" className="block text-lg font-medium">
+                <label
+                  htmlFor="symptoms"
+                  className="block text-lg font-medium text-gray-400"
+                >
                   Symptoms
                 </label>
                 <input
@@ -592,7 +705,7 @@ export default function Home() {
                   name="symptoms"
                   value={formData.symptoms}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                  className="w-full px-4 py-3 rounded-none text-white outline-none bg-white"
                   placeholder="Your symptoms eg: Headache"
                   required
                 />
@@ -600,7 +713,7 @@ export default function Home() {
               <div className="mb-4">
                 <label
                   htmlFor="medicalHistory"
-                  className="block text-lg font-medium"
+                  className="block text-lg font-medium text-gray-400"
                 >
                   Medical History
                 </label>
@@ -610,7 +723,7 @@ export default function Home() {
                   name="medicalHistory"
                   value={formData.medicalHistory}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                  className="w-full px-4 py-3 rounded-none text-white outline-none bg-white"
                   placeholder="Your medical history eg: Allergies"
                   required
                 />
@@ -618,7 +731,7 @@ export default function Home() {
               <div className="mb-4">
                 <label
                   htmlFor="healthDescription"
-                  className="block text-lg font-medium"
+                  className="block text-lg font-medium text-gray-400"
                 >
                   Health Description
                 </label>
@@ -627,14 +740,14 @@ export default function Home() {
                   name="healthDescription"
                   value={formData.healthDescription}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 rounded-lg text-white outline-none bg-[#2f2f2f]"
+                  className="w-full px-4 py-3 rounded-none text-white outline-none bg-white"
                   placeholder="Your health description eg: I'm having Fever"
                   rows={4}
                 />
               </div>
               <button
                 type="submit"
-                className={`bg-[#7ccf24] text-[#00319d] px-4 py-3 rounded w-full ${
+                className={`bg-[#7ccf24] text-[#00319d] px-4 py-3 rounded-none w-full ${
                   isLoading ? "cursor-wait" : "cursor-pointer"
                 }`}
               >
@@ -645,13 +758,13 @@ export default function Home() {
         </section>
       </main>
       {/* Footer */}
-      <footer className={`bg-[#000000] ${archivo.className}`}>
+      <footer className={`bg-[#00319d] ${archivo.className}`}>
         <div className="flex items-center justify-between p-5 h-16">
           <p className="text-white py-2 text-base">
             &copy; 2024 Survive Universe
           </p>
           <div className="flex items-center gap-2">
-            <p className="text-white py-2 text-base">Got To Top</p>
+            {/* <p className="text-white py-2 text-base">Got To Top</p> */}
             <svg
               width="48"
               height="48"
@@ -669,7 +782,7 @@ export default function Home() {
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M24.0002 30C23.5031 30 23.1002 29.5971 23.1002 29.1L23.1002 21.1345L20.7489 23.7238C20.4044 24.0821 19.8347 24.0933 19.4764 23.7487C19.1181 23.4042 19.1069 22.8345 19.4514 22.4762L23.3514 18.2762C23.5211 18.0997 23.7554 18 24.0002 18C24.245 18 24.4793 18.0997 24.6489 18.2762L28.5489 22.4762C28.8935 22.8345 28.8823 23.4042 28.524 23.7487C28.1657 24.0933 27.596 24.0821 27.2514 23.7238L24.9002 21.1345V29.1C24.9002 29.5971 24.4973 30 24.0002 30Z"
-                fill="#00319d"
+                fill="white"
               />
             </svg>
           </div>
